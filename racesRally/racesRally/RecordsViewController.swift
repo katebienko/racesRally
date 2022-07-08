@@ -20,8 +20,8 @@ class RecordsViewController: UIViewController {
         backButton.setRadiusWithShadow()
         
         resultTableView.dataSource = self
+        resultTableView.reloadData()
     }
-    
     
     private func createRoad() {
         let bg = UIImage(named: "roadBG.jpg")
@@ -35,12 +35,9 @@ class RecordsViewController: UIViewController {
     }
 }
 
-
 extension RecordsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsTableViewCell") as? RecordsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsTableViewCell") as? RecordsTableViewCell
         else {
             fatalError()
         }
@@ -58,11 +55,13 @@ extension RecordsViewController: UITableViewDataSource {
     }
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        guard let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data else { return 0 }
+        let gamersResult = try? decoder.decode([Gamer].self, from: data)
+        
+        return gamersResult!.count
     }
     
-        private func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) -> CGFloat {
-            return 60
-        }
+    private func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
-
