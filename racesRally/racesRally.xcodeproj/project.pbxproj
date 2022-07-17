@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A21B52F288469E800FD1D24 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A21B52E288469E800FD1D24 /* GoogleService-Info.plist */; };
 		4A3BC0842878ACAB00E57E4F /* car.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BC0832878ACAB00E57E4F /* car.mp3 */; };
 		4A47F6D328297E1C0061CE20 /* setRadiusWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47F6D228297E1C0061CE20 /* setRadiusWithShadow.swift */; };
 		4A7F5E8C285FA2020087CB92 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */; };
@@ -22,9 +23,12 @@
 		4ADF7A83282FF15F00674FEE /* Boogaloo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4ADF7A82282FF15F00674FEE /* Boogaloo-Regular.ttf */; };
 		4AE1BC40284681CB00171699 /* EnterNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1BC3F284681CB00171699 /* EnterNameViewController.swift */; };
 		4AE1BC43284682A900171699 /* Gamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE1BC42284682A900171699 /* Gamer.swift */; };
+		FDD31398D8DD0F1F640814B8 /* Pods_racesRally.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D664BB1BF739EE602C66E72E /* Pods_racesRally.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		383E6627C1707B6A27EE9123 /* Pods-racesRally.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-racesRally.release.xcconfig"; path = "Target Support Files/Pods-racesRally/Pods-racesRally.release.xcconfig"; sourceTree = "<group>"; };
+		4A21B52E288469E800FD1D24 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4A3BC0832878ACAB00E57E4F /* car.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = car.mp3; sourceTree = "<group>"; };
 		4A47F6D228297E1C0061CE20 /* setRadiusWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setRadiusWithShadow.swift; sourceTree = "<group>"; };
 		4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewCell.swift; sourceTree = "<group>"; };
@@ -42,6 +46,8 @@
 		4ADF7A82282FF15F00674FEE /* Boogaloo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Boogaloo-Regular.ttf"; sourceTree = "<group>"; };
 		4AE1BC3F284681CB00171699 /* EnterNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterNameViewController.swift; sourceTree = "<group>"; };
 		4AE1BC42284682A900171699 /* Gamer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gamer.swift; sourceTree = "<group>"; };
+		CDCA517922B7203D9547555E /* Pods-racesRally.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-racesRally.debug.xcconfig"; path = "Target Support Files/Pods-racesRally/Pods-racesRally.debug.xcconfig"; sourceTree = "<group>"; };
+		D664BB1BF739EE602C66E72E /* Pods_racesRally.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_racesRally.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,12 +55,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDD31398D8DD0F1F640814B8 /* Pods_racesRally.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		254C6C1728AF820CC333AF39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D664BB1BF739EE602C66E72E /* Pods_racesRally.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		31057D3485E77F32ADF2AEC4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CDCA517922B7203D9547555E /* Pods-racesRally.debug.xcconfig */,
+				383E6627C1707B6A27EE9123 /* Pods-racesRally.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		4A47F6D0282976D30061CE20 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +93,8 @@
 			children = (
 				4A8F495E28060AD6008F1BE6 /* racesRally */,
 				4A8F495D28060AD6008F1BE6 /* Products */,
+				31057D3485E77F32ADF2AEC4 /* Pods */,
+				254C6C1728AF820CC333AF39 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +124,7 @@
 				4A8F497428060C09008F1BE6 /* GameViewController.swift */,
 				4A8F496828060AD7008F1BE6 /* Assets.xcassets */,
 				4A8F496A28060AD7008F1BE6 /* LaunchScreen.storyboard */,
+				4A21B52E288469E800FD1D24 /* GoogleService-Info.plist */,
 				4A8F496D28060AD7008F1BE6 /* Info.plist */,
 			);
 			path = racesRally;
@@ -109,9 +137,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8F497028060AD7008F1BE6 /* Build configuration list for PBXNativeTarget "racesRally" */;
 			buildPhases = (
+				F265FA2E585C986F1F618FA1 /* [CP] Check Pods Manifest.lock */,
 				4A8F495828060AD6008F1BE6 /* Sources */,
 				4A8F495928060AD6008F1BE6 /* Frameworks */,
 				4A8F495A28060AD6008F1BE6 /* Resources */,
+				3456310D5152311E5C9081D1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,10 +194,53 @@
 				4A3BC0842878ACAB00E57E4F /* car.mp3 in Resources */,
 				4A8F496928060AD7008F1BE6 /* Assets.xcassets in Resources */,
 				4A8F496728060AD6008F1BE6 /* Main.storyboard in Resources */,
+				4A21B52F288469E800FD1D24 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3456310D5152311E5C9081D1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-racesRally/Pods-racesRally-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-racesRally/Pods-racesRally-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-racesRally/Pods-racesRally-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F265FA2E585C986F1F618FA1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-racesRally-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4A8F495828060AD6008F1BE6 /* Sources */ = {
@@ -327,6 +400,7 @@
 		};
 		4A8F497128060AD7008F1BE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDCA517922B7203D9547555E /* Pods-racesRally.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -346,6 +420,7 @@
 		};
 		4A8F497228060AD7008F1BE6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 383E6627C1707B6A27EE9123 /* Pods-racesRally.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
