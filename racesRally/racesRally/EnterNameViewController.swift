@@ -19,17 +19,15 @@ class EnterNameViewController: UIViewController {
     }
     
     private func backgroundImage() {
-        let bg = UIImage(named: "roadBG.jpg")
-        imageBG.image = bg
+        let roadBg = UIImage(named: "roadBG.jpg")
+        imageBG.image = roadBg
         
         self.view.insertSubview(imageBG, at: 0)
     }
     
     @IBAction func saveResult(_ sender: Any) {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
-       // dateFormatter.timeStyle = .short
         
         if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
             do {
@@ -44,19 +42,19 @@ class EnterNameViewController: UIViewController {
             
             gamersResult.append(gamer)
             gamersResult.sort(by: { $0.seconds > $1.seconds })
-            
+
             if gamersResult.count == 6 {
                 gamersResult.removeLast()
             }
         }
-         
+        
         do {
             let data = try encoder.encode(gamersResult)
             UserDefaults.standard.set(data, forKey: "gamerInfo")
         } catch {
             print(error.localizedDescription)
         }
-          
+        
         nameTextField.text = nil
         self.navigationController?.popToRootViewController(animated: false)
     }

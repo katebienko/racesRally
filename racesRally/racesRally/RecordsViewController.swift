@@ -24,8 +24,8 @@ class RecordsViewController: UIViewController {
     }
     
     private func createRoad() {
-        let bg = UIImage(named: "roadBG.jpg")
-        roadBackground.image = bg
+        let roadBg = UIImage(named: "roadBG.jpg")
+        roadBackground.image = roadBg
         
         self.view.insertSubview(roadBackground, at: 0)
     }

@@ -35,8 +35,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func createRoad() {
-        let bg = UIImage(named: "roadBG.jpg")
-        roadBackground.image = bg
+        let roadBg = UIImage(named: "roadBG.jpg")
+        roadBackground.image = roadBg
         
         self.view.insertSubview(roadBackground, at: 0)
     }
@@ -92,8 +92,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     private func chooseCar() {
         if UserDefaults.standard.value(forKey: "carColor") == nil {
             createBlueCar()
-        }
-        else {
+        } else {
             if UserDefaults.standard.value(forKey: "carColor") as! String == "yellow" {
                 createYellowCar()
             } else if UserDefaults.standard.value(forKey: "carColor") as! String == "blue" {
@@ -105,8 +104,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     private func chooseBarrier() {
         if UserDefaults.standard.value(forKey: "barrier") == nil {
             createBush()
-        }
-        else {
+        } else {
             if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
                 createBush()
             } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
@@ -147,9 +145,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     private func chooseSpeed() {
         if UserDefaults.standard.value(forKey: "speedCar") == nil {
             speedBarrier = 0.025
-        }
-        
-        else {
+        } else {
             switch UserDefaults.standard.value(forKey: "speedCar") as! String {
             case "1":
                 speedBarrier = 0.055
@@ -221,8 +217,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     enterNameController.modalPresentationStyle = .fullScreen
                     self.navigationController?.pushViewController(enterNameController, animated: false)
                 }
-            }
-            else {
+            } else {
                 if self.bushImageView.frame.origin.y >= self.view.frame.height {
                     timer.invalidate()
                     
@@ -232,9 +227,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     if UserDefaults.standard.value(forKey: "barrier") == nil {
                         self.createBush()
-                    }
-                    
-                    else {
+                    } else {
                         if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
                             self.createBush()
                         } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
@@ -243,8 +236,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                             self.createCanistra()
                         }
                     }
-                }
-                else {
+                } else {
                     self.result += 0
                     self.resultLabel.text = "\(self.result)"
                     UserDefaults.standard.set(self.result, forKey: "result")
@@ -254,7 +246,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func createLinesLeft() {
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { _ in
             
             let line = UIView(frame: CGRect(x: 125, y: -50, width: 10, height: 80))
             line.backgroundColor = UIColor.white
@@ -274,7 +266,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func createLinesRight() {
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { timer in
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { _ in
             
             let line = UIView(frame: CGRect(x: self.view.frame.maxX - 125, y: -50, width: 10, height: 80))
             line.backgroundColor = UIColor.white

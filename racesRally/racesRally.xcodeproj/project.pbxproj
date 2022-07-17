@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -76,7 +76,6 @@
 				CDCA517922B7203D9547555E /* Pods-racesRally.debug.xcconfig */,
 				383E6627C1707B6A27EE9123 /* Pods-racesRally.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -137,6 +136,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8F497028060AD7008F1BE6 /* Build configuration list for PBXNativeTarget "racesRally" */;
 			buildPhases = (
+				4A7FB32528847F9E00BD0FFD /* Run Script */,
 				F265FA2E585C986F1F618FA1 /* [CP] Check Pods Manifest.lock */,
 				4A8F495828060AD6008F1BE6 /* Sources */,
 				4A8F495928060AD6008F1BE6 /* Frameworks */,
@@ -217,6 +217,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-racesRally/Pods-racesRally-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		4A7FB32528847F9E00BD0FFD /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
 		F265FA2E585C986F1F618FA1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -5,4 +5,5 @@ target 'racesRally' do
   use_frameworks!
 
   pod 'FirebaseAnalytics'
+  pod 'SwiftLint'
 end

@@ -33,8 +33,7 @@ class SettingsViewController: UIViewController {
     private func showChosenSpeed() {
         if UserDefaults.standard.value(forKey: "speedCar") == nil {
             speedValue.text = "4"
-        }
-        else {
+        } else {
             if let speedInformation = UserDefaults.standard.value(forKey: "speedCar") as? String {
                 speedValue.text = speedInformation
             }
@@ -42,8 +41,7 @@ class SettingsViewController: UIViewController {
         
         if UserDefaults.standard.value(forKey: "positionThumb") == nil {
             sliderSpeed.value = 4
-        }
-        else {
+        } else {
             if let positionThumb = UserDefaults.standard.value(forKey: "positionThumb") as? Float {
                 sliderSpeed.value = positionThumb
             }
@@ -51,8 +49,8 @@ class SettingsViewController: UIViewController {
     }
     
     private func createRoad() {
-        let bg = UIImage(named: "roadBG.jpg")
-        roadBackground.image = bg
+        let roadBg = UIImage(named: "roadBG.jpg")
+        roadBackground.image = roadBg
         
         self.view.insertSubview(roadBackground, at: 0)
     }
@@ -62,8 +60,8 @@ class SettingsViewController: UIViewController {
             barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
             barrierBackgroundTwo.backgroundColor = .systemGray6
             barrierBackgroundThree.backgroundColor = .systemGray6
-        }
-        else {
+        } else {
+            
             if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
                 barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
                 barrierBackgroundTwo.backgroundColor = .systemGray6
@@ -82,13 +80,11 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    
     private func showChosenCar() {
         if UserDefaults.standard.value(forKey: "carColor") == nil {
             backgroundBlueCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
             backgroundYellowCar.backgroundColor = .systemGray6
-        }
-        else {
+        } else {
             if UserDefaults.standard.value(forKey: "carColor") as! String == "yellow" {
                 backgroundBlueCar.backgroundColor = .systemGray6
                 backgroundYellowCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
