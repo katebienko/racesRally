@@ -136,8 +136,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4A8F497028060AD7008F1BE6 /* Build configuration list for PBXNativeTarget "racesRally" */;
 			buildPhases = (
-				4A7FB32528847F9E00BD0FFD /* Run Script */,
 				F265FA2E585C986F1F618FA1 /* [CP] Check Pods Manifest.lock */,
+				4A7FB32528847F9E00BD0FFD /* Run Script */,
 				4A8F495828060AD6008F1BE6 /* Sources */,
 				4A8F495928060AD6008F1BE6 /* Frameworks */,
 				4A8F495A28060AD6008F1BE6 /* Resources */,
