@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController {
         showChosenBarrier()
         showChosenCar()
         gesturesHandles()
-        buttonDesign()
+        saveButtonDesign()
         showChosenSpeed()
     }
     
@@ -61,7 +61,6 @@ class SettingsViewController: UIViewController {
             barrierBackgroundTwo.backgroundColor = .systemGray6
             barrierBackgroundThree.backgroundColor = .systemGray6
         } else {
-            
             if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
                 barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
                 barrierBackgroundTwo.backgroundColor = .systemGray6
@@ -96,7 +95,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func buttonDesign() {
+    private func saveButtonDesign() {
         saveChangeButton.setRadiusWithShadow()
     }
     

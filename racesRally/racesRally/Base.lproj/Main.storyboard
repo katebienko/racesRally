@@ -11,9 +11,8 @@
         <!--Navigation Controller-->
         <scene sceneID="gq5-E3-gd3">
             <objects>
-                <navigationController id="cve-xx-AcX" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="cve-xx-AcX" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uX2-7F-Tra">
-                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -36,11 +35,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evN-GI-eF4">
-                                <rect key="frame" x="115" y="268.33333333333331" width="160" height="60"/>
+                                <rect key="frame" x="115" y="224.33333333333334" width="160" height="60.000000000000028"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Vdd-51-HIV"/>
-                                    <constraint firstAttribute="width" constant="160" id="ykf-Mp-Kk1"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="ykf-Mp-Kk1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="RECORDS">
@@ -51,10 +50,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FeK-nC-o3m">
-                                <rect key="frame" x="115" y="348.33333333333331" width="160" height="60"/>
+                                <rect key="frame" x="115" y="304.33333333333331" width="160" height="60"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="JRx-se-IZh"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="JRx-se-IZh"/>
                                     <constraint firstAttribute="height" constant="60" id="zFB-Jj-VvU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -66,11 +65,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJv-Vw-fni">
-                                <rect key="frame" x="115" y="188.33333333333334" width="160" height="60"/>
+                                <rect key="frame" x="115" y="144.33333333333334" width="160" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="9kb-gz-Kto"/>
-                                    <constraint firstAttribute="width" constant="160" id="HHo-qf-Z5y"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="HHo-qf-Z5y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="START">
@@ -81,7 +80,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" RACES RALLY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DET-W8-BOs">
-                                <rect key="frame" x="0.0" y="148" width="390" height="20.333333333333343"/>
+                                <rect key="frame" x="0.0" y="104" width="390" height="20.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>

@@ -10,7 +10,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
         
         mainImage()
         racesRallyText()
@@ -31,6 +30,7 @@ class ViewController: UIViewController {
         let text = "RACES RALLY"
         let attrString = NSMutableAttributedString(string: text, attributes: [:])
         let paragraphStyle = NSMutableParagraphStyle()
+        
         paragraphStyle.alignment = .center
         paragraphStyle.lineHeightMultiple = 0.80
        

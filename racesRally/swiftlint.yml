@@ -1,2 +1,5 @@
 disabled_rules:
 - type_name
+- control_statement
+- unused_optional_binding
+- trailing_comma
