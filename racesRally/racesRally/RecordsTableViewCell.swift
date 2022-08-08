@@ -2,9 +2,9 @@ import UIKit
 
 class RecordsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var pointsLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var pointsLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,10 +1,15 @@
 import UIKit
+import RxSwift
+import RxCocoa
 
 class RecordsViewController: UIViewController {
     
     private var labelsNames = [UILabel]()
     private var labelSeconds = [UILabel]()
     private var labelsTime = [UILabel]()
+    
+    private let disposeBag = DisposeBag()
+    var datasource = BehaviorSubject(value: [Gamer]())
     
     let decoder = JSONDecoder() // превращает данные в объект
     let encoder = JSONEncoder() // превращает объект в данные
@@ -15,15 +20,31 @@ class RecordsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        createRoad()
-        backButton.setRadiusWithShadow()
         
-        resultTableView.dataSource = self
-        resultTableView.reloadData()
+        self.datasource.bind(to: resultTableView.rx.items(cellIdentifier: "RecordsTableViewCell", cellType: RecordsTableViewCell.self)) {
+            index, model, cell in
+            cell.setup(with: model)
+        }
+        .disposed(by: disposeBag)
+        
+        if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
+            do {
+                let gamersResult = try decoder.decode([Gamer].self, from: data)
+                       
+                if var currentValues = try? self.datasource.value() {
+                    currentValues.append(contentsOf: gamersResult)
+                    self.datasource.onNext(currentValues)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+            
+        setBackground()
+        backButton.setRadiusWithShadow()
     }
     
-    private func createRoad() {
+    private func setBackground() {
         let roadBg = UIImage(named: "roadBG.jpg")
         roadBackground.image = roadBg
         
@@ -32,36 +53,5 @@ class RecordsViewController: UIViewController {
     
     @IBAction func backToMainPage(_ sender: Any) {
         navigationController?.popToRootViewController(animated: false)
-    }
-}
-
-extension RecordsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "RecordsTableViewCell") as? RecordsTableViewCell
-        else {
-            fatalError()
-        }
-        
-        if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
-            do {
-                let gamersResult = try decoder.decode([Gamer].self, from: data)
-                cell.setup(with: gamersResult[indexPath.row])
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        
-        return cell
-    }
-        
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data else { return 0 }
-        let gamersResult = try? decoder.decode([Gamer].self, from: data)
-        
-        return gamersResult!.count
-    }
-    
-    private func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
     }
 }
