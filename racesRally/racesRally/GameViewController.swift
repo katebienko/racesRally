@@ -1,5 +1,6 @@
 import UIKit
 import AVKit
+import CoreMotion
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
@@ -9,6 +10,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var speedBarrier: Double = 0.00
     var result: Int = 0
     var player: AVAudioPlayer?
+    var motion = CMMotionManager()
     
     @IBOutlet private weak var carImageView: UIImageView!
     @IBOutlet private weak var leftButton: UIButton!
@@ -26,8 +28,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         audioSoung()
         createBackground()
         buttonsDesign()
-        chooseCar()
-        chooseBarrier()
+        setCar()
+        setBarrier()
         longPressGestiresRecognizersButtons()
     }
     
@@ -62,6 +64,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 if self.view.frame.width + 10 <= self.carImageView.frame.maxX {
                     timer.invalidate()
                     self.isGameOver = true
+                    self.player?.stop()
                     self.navigationController?.popToRootViewController(animated: false)
                 }
                 
@@ -93,7 +96,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             })
     }
     
-    private func chooseCar() {
+    private func setCar() {
         switch UserDefaults.standard.value(forKey: "carColor") as? String {
             case
                 "yellow": createCar(name: "yellowCar.png")
@@ -104,7 +107,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    private func chooseBarrier() {
+    private func setBarrier() {
         switch UserDefaults.standard.value(forKey: "barrier") as? String {
         case
             "bush": createBarrier(name: "item.png")
@@ -173,8 +176,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
             if self.carImageView.frame.intersects(self.barrierImageView.frame) {
                 timer.invalidate()
-                self.isGameOver = true
                 self.player?.stop()
+                self.isGameOver = true
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let enterNameController = storyboard.instantiateViewController(identifier: "EnterNameViewController") as? EnterNameViewController {
