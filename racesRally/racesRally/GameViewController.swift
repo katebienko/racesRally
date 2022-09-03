@@ -10,7 +10,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var speedBarrier: Double = 0.00
     var result: Int = 0
     var player: AVAudioPlayer?
-    var motion = CMMotionManager()
+    
+    var motionManager: CMMotionManager!
     
     @IBOutlet private weak var carImageView: UIImageView!
     @IBOutlet private weak var leftButton: UIButton!
@@ -31,6 +32,24 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setCar()
         setBarrier()
         longPressGestiresRecognizersButtons()
+        accelerometerSettings()
+    }
+    
+    private func accelerometerSettings() {
+        motionManager = CMMotionManager()
+        motionManager.startAccelerometerUpdates()
+        
+        if motionManager.isAccelerometerAvailable {
+            motionManager.accelerometerUpdateInterval = 0.0001
+            
+            motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
+                if let trueData = data {
+                    self.view.reloadInputViews()
+                    //print("\(trueData.acceleration.x)")
+                    self.carImageView.center.x += CGFloat(trueData.acceleration.x)
+                }
+            }
+        }
     }
     
     private func audioSoung() {
@@ -98,10 +117,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func setCar() {
         switch UserDefaults.standard.value(forKey: "carColor") as? String {
-            case
-                "yellow": createCar(name: "yellowCar.png")
-            case
-                "blue": createCar(name: "blueCar.png")
+            case "yellow":
+                createCar(name: "yellowCar.png")
+            case "blue":
+                createCar(name: "blueCar.png")
             default:
                 createCar(name: "blueCar.png")
         }
@@ -109,12 +128,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func setBarrier() {
         switch UserDefaults.standard.value(forKey: "barrier") as? String {
-        case
-            "bush": createBarrier(name: "item.png")
-        case
-            "conus": createBarrier(name: "item2.png")
-        case
-            "canistra": createBarrier(name: "item3.png")
+        case "bush":
+            createBarrier(name: "item.png")
+        case "conus":
+            createBarrier(name: "item2.png")
+        case"canistra":
+            createBarrier(name: "item3.png")
         default:
             createBarrier(name: "item.png")
         }
