@@ -13,18 +13,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private weak var carImageView: UIImageView!
     @IBOutlet private weak var leftButton: UIButton!
     @IBOutlet private weak var rightButton: UIButton!
-    @IBOutlet private weak var bushImageView: UIImageView!
+    @IBOutlet private weak var barrierImageView: UIImageView!
     @IBOutlet private weak var resultLabel: UILabel!
     @IBOutlet private weak var roadBackground: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createLines(pointX: 125)
+        createLines(pointX: Int(self.view.frame.maxX) - 125)
+        
         audioSoung()
-        createRoad()
+        createBackground()
         buttonsDesign()
-        createLinesLeft()
-        createLinesRight()
         chooseCar()
         chooseBarrier()
         longPressGestiresRecognizersButtons()
@@ -37,7 +38,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    private func createRoad() {
+    private func createBackground() {
         let roadBg = UIImage(named: "roadBG.jpg")
         roadBackground.image = roadBg
         
@@ -94,9 +95,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func chooseCar() {
         switch UserDefaults.standard.value(forKey: "carColor") as? String {
-            case "yellow": createCar(name: "yellowCar.png")
-            case "blue": createCar(name: "blueCar.png")
-            default: createCar(name: "blueCar.png")
+            case
+                "yellow": createCar(name: "yellowCar.png")
+            case
+                "blue": createCar(name: "blueCar.png")
+            default:
+                createCar(name: "blueCar.png")
         }
     }
     
@@ -154,63 +158,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         chooseSpeed()
         
         let image = UIImage(named: name)
-        bushImageView.image = image
-        bushImageView.contentMode = .scaleAspectFit
-        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-        bushImageView.frame.origin.y = 0
-        bushImageView.bringSubviewToFront(bushImageView)
+        barrierImageView.image = image
+        barrierImageView.contentMode = .scaleAspectFit
+        barrierImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
+        barrierImageView.frame.origin.y = 0
+        barrierImageView.bringSubviewToFront(barrierImageView)
         
         moveBarriersDown()
     }
     
-//    private func createBush() {
-//        chooseSpeed()
-//
-//        let image = UIImage(named: "item.png")
-//        bushImageView.image = image
-//        bushImageView.contentMode = .scaleAspectFit
-//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-//        bushImageView.frame.origin.y = 0
-//        bushImageView.bringSubviewToFront(bushImageView)
-//
-//        moveBarriersDown()
-//    }
-//
-//    private func createConus() {
-//        chooseSpeed()
-//
-//        let image = UIImage(named: "item2.png")
-//        bushImageView.image = image
-//        bushImageView.contentMode = .scaleAspectFit
-//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-//        bushImageView.frame.origin.y = 0
-//        bushImageView.bringSubviewToFront(bushImageView)
-//
-//        moveBarriersDown()
-//    }
-//
-//    private func createCanistra() {
-//        chooseSpeed()
-//
-//        let image = UIImage(named: "item3.png")
-//        bushImageView.image = image
-//        bushImageView.contentMode = .scaleAspectFit
-//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-//        bushImageView.frame.origin.y = 0
-//        bushImageView.bringSubviewToFront(bushImageView)
-//
-//        moveBarriersDown()
-//    }
-    
     private func moveBarriersDown() {
         Timer.scheduledTimer(withTimeInterval: speedBarrier, repeats: true, block: { timer in
-            self.bushImageView.frame.origin.y += 5
+            self.barrierImageView.frame.origin.y += 5
             
-            if self.carImageView.frame.intersects(self.bushImageView.frame) {
+            if self.carImageView.frame.intersects(self.barrierImageView.frame) {
                 timer.invalidate()
                 self.isGameOver = true
                 self.player?.stop()
-               // self.navigationController?.popToRootViewController(animated: false)
                 
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let enterNameController = storyboard.instantiateViewController(identifier: "EnterNameViewController") as? EnterNameViewController {
@@ -218,23 +182,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     self.navigationController?.pushViewController(enterNameController, animated: false)
                 }
             } else {
-                if self.bushImageView.frame.origin.y >= self.view.frame.height {
+                if self.barrierImageView.frame.origin.y >= self.view.frame.height {
                     timer.invalidate()
                     
                     self.result += 1
                     self.resultLabel.text = "\(self.result)"
                     UserDefaults.standard.set(self.result, forKey: "points")
                     
-                    if UserDefaults.standard.value(forKey: "barrier") == nil {
+                    switch UserDefaults.standard.value(forKey: "barrier") as? String {
+                    case "bush":
                         self.createBarrier(name: "item.png")
-                    } else {
-                        if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
-                            self.createBarrier(name: "item.png")
-                        } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
-                            self.createBarrier(name: "item2.png")
-                        } else if UserDefaults.standard.value(forKey: "barrier") as! String == "canistra" {
-                            self.createBarrier(name: "item3.png")
-                        }
+                    case "conus":
+                        self.createBarrier(name: "item2.png")
+                    case "canistra":
+                        self.createBarrier(name: "item3.png")
+                    default:
+                        self.createBarrier(name: "item.png")
                     }
                 } else {
                     self.result += 0
@@ -245,33 +208,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         })
     }
     
-    private func createLinesLeft() {
+    private func createLines(pointX: Int) {
         Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { _ in
             
-            let line = UIView(frame: CGRect(x: 125, y: -50, width: 10, height: 80))
+            let line = UIView(frame: CGRect(x: pointX, y: -50, width: 10, height: 80))
             line.backgroundColor = UIColor.white
             line.layer.opacity = 0.5
            
-            self.index += 1
-            self.linesArray.append(line)
-            self.view.addSubview(line)
-            self.view.insertSubview(line, at: 1)
-        
-            UIView.animate(withDuration: 1.5, delay: 0, options: .curveLinear) {
-            
-            for index in 0 ... self.linesArray.count - 1 {
-                self.linesArray[index].frame.origin.y = self.view.frame.height
-            }
-        }})
-    }
-    
-    private func createLinesRight() {
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true, block: { _ in
-            
-            let line = UIView(frame: CGRect(x: self.view.frame.maxX - 125, y: -50, width: 10, height: 80))
-            line.backgroundColor = UIColor.white
-            line.layer.opacity = 0.5
-            
             self.index += 1
             self.linesArray.append(line)
             self.view.addSubview(line)

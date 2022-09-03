@@ -22,7 +22,15 @@ class SettingsViewController: UIViewController {
         
         createRoad()
         showsCars()
-        showBarriers()
+        
+        showBarriers(name: "item.png", imageBarrier: imageBarrier1)
+        showBarriers(name: "item2.png", imageBarrier: imageBarrier2)
+        showBarriers(name: "item3.png", imageBarrier: imageBarrier3)
+        
+        barrierBackgroundOne.layer.cornerRadius = 10
+        barrierBackgroundTwo.layer.cornerRadius = 10
+        barrierBackgroundThree.layer.cornerRadius = 10
+       
         showChosenBarrier()
         showChosenCar()
         gesturesHandles()
@@ -156,49 +164,31 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set("blue", forKey: "carColor")
     }
     
-    private func showBarriers() {
-        barrierBackgroundOne.layer.cornerRadius = 10
-        barrierBackgroundTwo.layer.cornerRadius = 10
-        barrierBackgroundThree.layer.cornerRadius = 10
-        
-        let bush = UIImage(named: "item.png")
-        imageBarrier1.image = bush
-        imageBarrier1.contentMode = .scaleAspectFit
-        self.view.addSubview(imageBarrier1)
-        
-        let bush2 = UIImage(named: "item2.png")
-        imageBarrier2.image = bush2
-        imageBarrier2.contentMode = .scaleAspectFit
-        self.view.addSubview(imageBarrier2)
-        
-        let bush3 = UIImage(named: "item3.png")
-        imageBarrier3.image = bush3
-        imageBarrier3.contentMode = .scaleAspectFit
-        self.view.addSubview(imageBarrier3)
+    private func showBarriers(name: String, imageBarrier: UIImageView) {
+        let barrier = UIImage(named: name)
+        imageBarrier.image = barrier
+        imageBarrier.contentMode = .scaleAspectFit
+        self.view.addSubview(imageBarrier)
     }
     
     private func showsCars() {
         backgroundBlueCar.layer.cornerRadius = 15
         backgroundYellowCar.layer.cornerRadius = 15
         
-        let blueCar = UIImage(named: "blueCar.png")
-        blueCarImage.image = blueCar
-        blueCarImage.contentMode = .scaleAspectFit
-        blueCarImage.layer.shadowColor = UIColor.black.cgColor
-        blueCarImage.layer.shadowOffset = CGSize(width: 5, height: 5)
-        blueCarImage.layer.shadowOpacity = 0.3
+        initialCars(name: "blueCar.png", carImage: blueCarImage)
+        initialCars(name: "yellowCar.png", carImage: yellowCarImage)
+    }
+    
+    private func initialCars(name: String, carImage: UIImageView) {
+        let myCar = UIImage(named: name)
+    
+        carImage.image = myCar
+        carImage.contentMode = .scaleAspectFit
+        carImage.layer.shadowColor = UIColor.black.cgColor
+        carImage.layer.shadowOffset = CGSize(width: 5, height: 5)
+        carImage.layer.shadowOpacity = 0.3
         
-        self.view.addSubview(blueCarImage)
-        
-        let yellowCar = UIImage(named: "yellowCar.png")
-        yellowCarImage.image = yellowCar
-        yellowCarImage.contentMode = .scaleAspectFit
-        yellowCarImage.center.x = view.center.x
-        yellowCarImage.layer.shadowColor = UIColor.black.cgColor
-        yellowCarImage.layer.shadowOffset = CGSize(width: 5, height: 5)
-        yellowCarImage.layer.shadowOpacity = 0.3
-        
-        self.view.addSubview(yellowCarImage)  
+        self.view.addSubview(carImage)
     }
     
     @IBAction func saveChangeButtonPressed(_ sender: Any) {
