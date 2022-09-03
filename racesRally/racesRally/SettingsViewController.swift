@@ -56,26 +56,23 @@ class SettingsViewController: UIViewController {
     }
     
     private func showChosenBarrier() {
-        if UserDefaults.standard.value(forKey: "barrier") == nil {
+        switch UserDefaults.standard.value(forKey: "barrier") as? String {
+        case "bush":
             barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
             barrierBackgroundTwo.backgroundColor = .systemGray6
             barrierBackgroundThree.backgroundColor = .systemGray6
-        } else {
-            if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
-                barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
-                barrierBackgroundTwo.backgroundColor = .systemGray6
-                barrierBackgroundThree.backgroundColor = .systemGray6
-                
-            } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
-                barrierBackgroundOne.backgroundColor = .systemGray6
-                barrierBackgroundTwo.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
-                barrierBackgroundThree.backgroundColor = .systemGray6
-                
-            } else if UserDefaults.standard.value(forKey: "barrier") as! String == "canistra" {
-                barrierBackgroundOne.backgroundColor = .systemGray6
-                barrierBackgroundTwo.backgroundColor = .systemGray6
-                barrierBackgroundThree.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
-            }
+        case "conus":
+            barrierBackgroundOne.backgroundColor = .systemGray6
+            barrierBackgroundTwo.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            barrierBackgroundThree.backgroundColor = .systemGray6
+        case "canistra":
+            barrierBackgroundOne.backgroundColor = .systemGray6
+            barrierBackgroundTwo.backgroundColor = .systemGray6
+            barrierBackgroundThree.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+        default:
+            barrierBackgroundOne.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            barrierBackgroundTwo.backgroundColor = .systemGray6
+            barrierBackgroundThree.backgroundColor = .systemGray6
         }
     }
     
@@ -184,7 +181,7 @@ class SettingsViewController: UIViewController {
         backgroundBlueCar.layer.cornerRadius = 15
         backgroundYellowCar.layer.cornerRadius = 15
         
-        let blueCar = UIImage(named: "myCar.png")
+        let blueCar = UIImage(named: "blueCar.png")
         blueCarImage.image = blueCar
         blueCarImage.contentMode = .scaleAspectFit
         blueCarImage.layer.shadowColor = UIColor.black.cgColor

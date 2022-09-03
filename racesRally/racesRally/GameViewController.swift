@@ -20,11 +20,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let audioURL = Bundle.main.url(forResource: "car", withExtension: "mp3") {
-            self.player = try? AVAudioPlayer(contentsOf: audioURL)
-            player?.play()
-        }
-        
+        audioSoung()
         createRoad()
         buttonsDesign()
         createLinesLeft()
@@ -32,6 +28,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         chooseCar()
         chooseBarrier()
         longPressGestiresRecognizersButtons()
+    }
+    
+    private func audioSoung() {
+        if let audioURL = Bundle.main.url(forResource: "car", withExtension: "mp3") {
+            self.player = try? AVAudioPlayer(contentsOf: audioURL)
+            player?.play()
+        }
     }
     
     private func createRoad() {
@@ -90,28 +93,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     private func chooseCar() {
-        if UserDefaults.standard.value(forKey: "carColor") == nil {
-            createBlueCar()
-        } else {
-            if UserDefaults.standard.value(forKey: "carColor") as! String == "yellow" {
-                createYellowCar()
-            } else if UserDefaults.standard.value(forKey: "carColor") as! String == "blue" {
-                createBlueCar()
-            }
+        switch UserDefaults.standard.value(forKey: "carColor") as? String {
+            case "yellow": createCar(name: "yellowCar.png")
+            case "blue": createCar(name: "blueCar.png")
+            default: createCar(name: "blueCar.png")
         }
     }
     
     private func chooseBarrier() {
-        if UserDefaults.standard.value(forKey: "barrier") == nil {
-            createBush()
-        } else {
-            if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
-                createBush()
-            } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
-                createConus()
-            } else if UserDefaults.standard.value(forKey: "barrier") as! String == "canistra" {
-                createCanistra()
-            }
+        switch UserDefaults.standard.value(forKey: "barrier") as? String {
+        case
+            "bush": createBarrier(name: "item.png")
+        case
+            "conus": createBarrier(name: "item2.png")
+        case
+            "canistra": createBarrier(name: "item3.png")
+        default:
+            createBarrier(name: "item.png")
         }
     }
     
@@ -119,20 +117,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         leftButton.layer.cornerRadius = leftButton.frame.height / 2
         rightButton.layer.cornerRadius = rightButton.frame.height / 2
     }
-
-    private func createBlueCar() {
-        let image = UIImage(named: "myCar.png")
-        carImageView.image = image
-        carImageView.contentMode = .scaleAspectFit
-        carImageView.layer.shadowColor = UIColor.black.cgColor
-        carImageView.layer.shadowOffset = CGSize(width: 5, height: 5)
-        carImageView.layer.shadowOpacity = 0.3
-        
-        self.view.bringSubviewToFront(carImageView)
-    }
     
-    private func createYellowCar() {
-        let image = UIImage(named: "yellowCar.png")
+    private func createCar(name: String) {
+        let image = UIImage(named: name)
         carImageView.image = image
         carImageView.contentMode = .scaleAspectFit
         carImageView.layer.shadowColor = UIColor.black.cgColor
@@ -162,11 +149,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
     }
-    
-    private func createBush() {
+        
+    private func createBarrier(name: String) {
         chooseSpeed()
         
-        let image = UIImage(named: "item.png")
+        let image = UIImage(named: name)
         bushImageView.image = image
         bushImageView.contentMode = .scaleAspectFit
         bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
@@ -176,31 +163,44 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         moveBarriersDown()
     }
     
-    private func createConus() {
-        chooseSpeed()
-        
-        let image = UIImage(named: "item2.png")
-        bushImageView.image = image
-        bushImageView.contentMode = .scaleAspectFit
-        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-        bushImageView.frame.origin.y = 0
-        bushImageView.bringSubviewToFront(bushImageView)
-
-        moveBarriersDown()
-    }
-    
-    private func createCanistra() {
-        chooseSpeed()
-        
-        let image = UIImage(named: "item3.png")
-        bushImageView.image = image
-        bushImageView.contentMode = .scaleAspectFit
-        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
-        bushImageView.frame.origin.y = 0
-        bushImageView.bringSubviewToFront(bushImageView)
-
-        moveBarriersDown()
-    }
+//    private func createBush() {
+//        chooseSpeed()
+//
+//        let image = UIImage(named: "item.png")
+//        bushImageView.image = image
+//        bushImageView.contentMode = .scaleAspectFit
+//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
+//        bushImageView.frame.origin.y = 0
+//        bushImageView.bringSubviewToFront(bushImageView)
+//
+//        moveBarriersDown()
+//    }
+//
+//    private func createConus() {
+//        chooseSpeed()
+//
+//        let image = UIImage(named: "item2.png")
+//        bushImageView.image = image
+//        bushImageView.contentMode = .scaleAspectFit
+//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
+//        bushImageView.frame.origin.y = 0
+//        bushImageView.bringSubviewToFront(bushImageView)
+//
+//        moveBarriersDown()
+//    }
+//
+//    private func createCanistra() {
+//        chooseSpeed()
+//
+//        let image = UIImage(named: "item3.png")
+//        bushImageView.image = image
+//        bushImageView.contentMode = .scaleAspectFit
+//        bushImageView.frame.origin.x = CGFloat(Int.random(in: 50 ..< Int(view.frame.width - 100)))
+//        bushImageView.frame.origin.y = 0
+//        bushImageView.bringSubviewToFront(bushImageView)
+//
+//        moveBarriersDown()
+//    }
     
     private func moveBarriersDown() {
         Timer.scheduledTimer(withTimeInterval: speedBarrier, repeats: true, block: { timer in
@@ -226,14 +226,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     UserDefaults.standard.set(self.result, forKey: "points")
                     
                     if UserDefaults.standard.value(forKey: "barrier") == nil {
-                        self.createBush()
+                        self.createBarrier(name: "item.png")
                     } else {
                         if UserDefaults.standard.value(forKey: "barrier") as! String == "bush" {
-                            self.createBush()
+                            self.createBarrier(name: "item.png")
                         } else if UserDefaults.standard.value(forKey: "barrier") as! String == "conus" {
-                            self.createConus()
+                            self.createBarrier(name: "item2.png")
                         } else if UserDefaults.standard.value(forKey: "barrier") as! String == "canistra" {
-                            self.createCanistra()
+                            self.createBarrier(name: "item3.png")
                         }
                     }
                 } else {
