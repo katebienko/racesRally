@@ -26,8 +26,7 @@ class EnterNameViewController: UIViewController {
     }
     
     @IBAction func saveResult(_ sender: Any) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
+        showShareAlert()
         
         if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
             do {
@@ -37,13 +36,16 @@ class EnterNameViewController: UIViewController {
             } 
         }
         
-        if let seconds = UserDefaults.standard.value(forKey: "result") as? Int {
-            let gamer = Gamer(name: nameTextField.text!, seconds: seconds, time: dateFormatter.string(from: Date()))
+        if let points = UserDefaults.standard.value(forKey: "points") as? Int {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            
+            let gamer = Gamer(name: nameTextField.text!, seconds: points, time: dateFormatter.string(from: Date()))
             
             gamersResult.append(gamer)
             gamersResult.sort(by: { $0.seconds > $1.seconds })
 
-            if gamersResult.count == 6 {
+            if gamersResult.count > 10 {
                 gamersResult.removeLast()
             }
         }
@@ -54,8 +56,31 @@ class EnterNameViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    private func showShareAlert() {
+        navigationController?.popToRootViewController(animated: false)
         
-        nameTextField.text = nil
-        self.navigationController?.popToRootViewController(animated: false)
+        let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: UIAlertController.Style.alert)
+        
+        if let points = UserDefaults.standard.value(forKey: "points") as? Int {
+            
+            alert.addAction(UIAlertAction(title: "Share", style: UIAlertAction.Style.default, handler: { (action) in
+                let shareText = "My result at RacesRally - \(points) points!"
+                
+                //Convert to a string that can be used in URL queries
+                guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+                
+                //Start the share screen by putting it on the URL
+                UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in
+                self.navigationController?.popToRootViewController(animated: false)
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

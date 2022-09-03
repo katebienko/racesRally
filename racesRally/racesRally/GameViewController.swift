@@ -223,7 +223,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.result += 1
                     self.resultLabel.text = "\(self.result)"
-                    UserDefaults.standard.set(self.result, forKey: "result")
+                    UserDefaults.standard.set(self.result, forKey: "points")
                     
                     if UserDefaults.standard.value(forKey: "barrier") == nil {
                         self.createBush()
@@ -239,7 +239,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     self.result += 0
                     self.resultLabel.text = "\(self.result)"
-                    UserDefaults.standard.set(self.result, forKey: "result")
+                    UserDefaults.standard.set(self.result, forKey: "points")
                 }
             }
         })
