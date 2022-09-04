@@ -40,13 +40,35 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         motionManager.startAccelerometerUpdates()
         
         if motionManager.isAccelerometerAvailable {
-            motionManager.accelerometerUpdateInterval = 0.0001
+            motionManager.accelerometerUpdateInterval = 0.000001
             
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
                 if let trueData = data {
                     self.view.reloadInputViews()
-                    //print("\(trueData.acceleration.x)")
+
                     self.carImageView.center.x += CGFloat(trueData.acceleration.x)
+                    
+                    print(Int(trueData.acceleration.x * 10000))
+                    
+                    if Int(trueData.acceleration.x * 10000) > 2000 {
+                        self.carImageView.transform = CGAffineTransform(rotationAngle: 0.10)
+                    }
+                    
+                    else if Int(trueData.acceleration.x * 10000) > -2000 && Int(trueData.acceleration.x * 10000) < 2000 {
+                        self.carImageView.transform = CGAffineTransform(rotationAngle: 0)
+                    }
+                    
+                    else if Int(trueData.acceleration.x * 10000) < -2000 {
+                        self.carImageView.transform = CGAffineTransform(rotationAngle: -0.10)
+                    }
+                    
+//                    Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { timer in
+//                        if self.view.frame.origin.x + 10 >= self.carImageView.frame.minX {
+//                            timer.invalidate()
+//                            self.isGameOver = true
+//                            self.navigationController?.popToRootViewController(animated: false)
+//                        }
+//                    })
                 }
             }
         }
