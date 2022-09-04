@@ -24,10 +24,20 @@ class SettingsViewController: UIViewController {
         
         createRoad()
         showsCars()
-        
         showBarriers(name: "item.png", imageBarrier: imageBarrier1)
         showBarriers(name: "item2.png", imageBarrier: imageBarrier2)
         showBarriers(name: "item3.png", imageBarrier: imageBarrier3)
+        setButtonsDesigns()
+        showChosenBarrier()
+        showChosenCar()
+        showChosenControl()
+        gesturesHandles()
+        showChosenSpeed()
+    }
+    
+    private func setButtonsDesigns() {
+        backgroundBlueCar.layer.cornerRadius = 15
+        backgroundYellowCar.layer.cornerRadius = 15
         
         barrierBackgroundOne.layer.cornerRadius = 10
         barrierBackgroundTwo.layer.cornerRadius = 10
@@ -35,13 +45,8 @@ class SettingsViewController: UIViewController {
         
         backgroundControlButtons.layer.cornerRadius = 10
         backgroundControlAccelerometer.layer.cornerRadius = 10
-       
-        showChosenBarrier()
-        showChosenCar()
-        showChosenControl()
-        gesturesHandles()
-        saveButtonDesign()
-        showChosenSpeed()
+        
+        saveChangeButton.setRadiusWithShadow()
     }
     
     private func showChosenSpeed() {
@@ -118,10 +123,6 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    private func saveButtonDesign() {
-        saveChangeButton.setRadiusWithShadow()
-    }
-    
     private func gesturesHandles() {
         let tapBlueCar = UITapGestureRecognizer(target: self, action: #selector(self.handleTapBlueCar(_:)))
         blueCarImage.isUserInteractionEnabled = true
@@ -159,7 +160,7 @@ class SettingsViewController: UIViewController {
         
         UserDefaults.standard.set("bush", forKey: "barrier")
     }
-    
+
     @objc func handleTapConus(_ sender: UITapGestureRecognizer? = nil) {
         barrierBackgroundOne.backgroundColor = .systemGray6
         barrierBackgroundTwo.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
@@ -212,16 +213,13 @@ class SettingsViewController: UIViewController {
     }
     
     private func showsCars() {
-        backgroundBlueCar.layer.cornerRadius = 15
-        backgroundYellowCar.layer.cornerRadius = 15
-        
         initialCars(name: "blueCar.png", carImage: blueCarImage)
         initialCars(name: "yellowCar.png", carImage: yellowCarImage)
     }
     
     private func initialCars(name: String, carImage: UIImageView) {
         let myCar = UIImage(named: name)
-    
+        
         carImage.image = myCar
         carImage.contentMode = .scaleAspectFit
         carImage.layer.shadowColor = UIColor.black.cgColor

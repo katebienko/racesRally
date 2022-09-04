@@ -33,8 +33,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setSpeed()
         setCar()
         setBarrier()
-        gesturesControl()
-       // accelerometerControl()
+        setControl()
     }
     
     private func accelerometerControl() {
@@ -90,7 +89,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.insertSubview(roadBackground, at: 0)
     }
     
-    private func gesturesControl() {
+    private func buttonsControl() {
         let pressRightButton = UILongPressGestureRecognizer(target: self, action: #selector(longPressRight))
         pressRightButton.minimumPressDuration = 0
         rightButton.addGestureRecognizer(pressRightButton)
@@ -192,6 +191,17 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             createBarrier(name: "item3.png")
         default:
             createBarrier(name: "item.png")
+        }
+    }
+    
+    private func setControl() {
+        switch UserDefaults.standard.value(forKey: "control") as? String {
+        case "buttons":
+            buttonsControl()
+        case "accelerometer":
+            accelerometerControl()
+        default:
+            buttonsControl()
         }
     }
     
