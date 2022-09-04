@@ -11,6 +11,7 @@
 		4A3BC0842878ACAB00E57E4F /* car.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4A3BC0832878ACAB00E57E4F /* car.mp3 */; };
 		4A47F6D328297E1C0061CE20 /* setRadiusWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A47F6D228297E1C0061CE20 /* setRadiusWithShadow.swift */; };
 		4A7F5E8C285FA2020087CB92 /* RecordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */; };
+		4A834CC128C4F01F00F888E0 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A834CC028C4F01F00F888E0 /* OnBoardingViewController.swift */; };
 		4A8F496028060AD6008F1BE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F495F28060AD6008F1BE6 /* AppDelegate.swift */; };
 		4A8F496228060AD6008F1BE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F496128060AD6008F1BE6 /* SceneDelegate.swift */; };
 		4A8F496428060AD6008F1BE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8F496328060AD6008F1BE6 /* ViewController.swift */; };
@@ -32,6 +33,7 @@
 		4A3BC0832878ACAB00E57E4F /* car.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = car.mp3; sourceTree = "<group>"; };
 		4A47F6D228297E1C0061CE20 /* setRadiusWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setRadiusWithShadow.swift; sourceTree = "<group>"; };
 		4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsTableViewCell.swift; sourceTree = "<group>"; };
+		4A834CC028C4F01F00F888E0 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		4A8F495C28060AD6008F1BE6 /* racesRally.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = racesRally.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A8F495F28060AD6008F1BE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4A8F496128060AD6008F1BE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */,
 				4AE1BC42284682A900171699 /* Gamer.swift */,
 				4AE1BC3F284681CB00171699 /* EnterNameViewController.swift */,
+				4A834CC028C4F01F00F888E0 /* OnBoardingViewController.swift */,
 				4A8F497A28060CF3008F1BE6 /* SettingsViewController.swift */,
 				4A8F497728060C96008F1BE6 /* RecordsViewController.swift */,
 				4A8F497428060C09008F1BE6 /* GameViewController.swift */,
@@ -293,6 +296,7 @@
 				4AE1BC43284682A900171699 /* Gamer.swift in Sources */,
 				4AE1BC40284681CB00171699 /* EnterNameViewController.swift in Sources */,
 				4A8F497B28060CF3008F1BE6 /* SettingsViewController.swift in Sources */,
+				4A834CC128C4F01F00F888E0 /* OnBoardingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
