@@ -16,6 +16,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet private weak var speedValue: UILabel!
     @IBOutlet private weak var sliderSpeed: UISlider!
     @IBOutlet private weak var roadBackground: UIImageView!
+    @IBOutlet private weak var backgroundControlButtons: UIView!
+    @IBOutlet private weak var backgroundControlAccelerometer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,9 +32,13 @@ class SettingsViewController: UIViewController {
         barrierBackgroundOne.layer.cornerRadius = 10
         barrierBackgroundTwo.layer.cornerRadius = 10
         barrierBackgroundThree.layer.cornerRadius = 10
+        
+        backgroundControlButtons.layer.cornerRadius = 10
+        backgroundControlAccelerometer.layer.cornerRadius = 10
        
         showChosenBarrier()
         showChosenCar()
+        showChosenControl()
         gesturesHandles()
         saveButtonDesign()
         showChosenSpeed()
@@ -85,18 +91,30 @@ class SettingsViewController: UIViewController {
     }
     
     private func showChosenCar() {
-        if UserDefaults.standard.value(forKey: "carColor") == nil {
+        switch UserDefaults.standard.value(forKey: "carColor") as? String {
+        case "yellow":
+            backgroundBlueCar.backgroundColor = .systemGray6
+            backgroundYellowCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+        case "blue":
             backgroundBlueCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
             backgroundYellowCar.backgroundColor = .systemGray6
-        } else {
-            if UserDefaults.standard.value(forKey: "carColor") as! String == "yellow" {
-                backgroundBlueCar.backgroundColor = .systemGray6
-                backgroundYellowCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
-                
-            } else if UserDefaults.standard.value(forKey: "carColor") as! String == "blue" {
-                backgroundBlueCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
-                backgroundYellowCar.backgroundColor = .systemGray6
-            }
+        default:
+            backgroundBlueCar.backgroundColor = .systemGray6
+            backgroundYellowCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+        }
+    }
+    
+    private func showChosenControl() {
+        switch UserDefaults.standard.value(forKey: "control") as? String {
+        case "buttons":
+            backgroundControlButtons.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            backgroundControlAccelerometer.backgroundColor = .systemGray6
+        case "accelerometer":
+            backgroundControlButtons.backgroundColor = .systemGray6
+            backgroundControlAccelerometer.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+        default:
+            backgroundControlButtons.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            backgroundControlAccelerometer.backgroundColor = .systemGray6
         }
     }
     
@@ -124,6 +142,14 @@ class SettingsViewController: UIViewController {
         let tapCanistra = UITapGestureRecognizer(target: self, action: #selector(self.handleTapCanistra(_:)))
         imageBarrier3.isUserInteractionEnabled = true
         imageBarrier3.addGestureRecognizer(tapCanistra)
+        
+        let tapButtons = UITapGestureRecognizer(target: self, action: #selector(self.handleTapButtons(_:)))
+        backgroundControlButtons.isUserInteractionEnabled = true
+        backgroundControlButtons.addGestureRecognizer(tapButtons)
+        
+        let tapAccelerometer = UITapGestureRecognizer(target: self, action: #selector(self.handleTapAccelerometer(_:)))
+        backgroundControlAccelerometer.isUserInteractionEnabled = true
+        backgroundControlAccelerometer.addGestureRecognizer(tapAccelerometer)
     }
     
     @objc func handleTapBush(_ sender: UITapGestureRecognizer? = nil) {
@@ -162,6 +188,20 @@ class SettingsViewController: UIViewController {
         backgroundYellowCar.backgroundColor = .systemGray6
         
         UserDefaults.standard.set("blue", forKey: "carColor")
+    }
+    
+    @objc func handleTapButtons(_ sender: UITapGestureRecognizer? = nil) {
+        backgroundControlButtons.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+        backgroundControlAccelerometer.backgroundColor = .systemGray6
+
+        UserDefaults.standard.set("buttons", forKey: "control")
+    }
+    
+    @objc func handleTapAccelerometer(_ sender: UITapGestureRecognizer? = nil) {
+        backgroundControlButtons.backgroundColor = .systemGray6
+        backgroundControlAccelerometer.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+
+        UserDefaults.standard.set("accelerometer", forKey: "control")
     }
     
     private func showBarriers(name: String, imageBarrier: UIImageView) {
