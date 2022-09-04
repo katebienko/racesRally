@@ -10,7 +10,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var speedBarrier: Double = 0.00
     var result: Int = 0
     var player: AVAudioPlayer?
-    
     var motionManager: CMMotionManager!
     
     @IBOutlet private weak var carImageView: UIImageView!
@@ -20,22 +19,28 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet private weak var resultLabel: UILabel!
     @IBOutlet private weak var roadBackground: UIImageView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewWillAppear(_ animated: Bool) {
         createLines(pointX: 125)
         createLines(pointX: Int(self.view.frame.maxX) - 125)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         audioSoung()
         createBackground()
         buttonsDesign()
+        setSpeed()
         setCar()
         setBarrier()
-        longPressGestiresRecognizersButtons()
-        accelerometerSettings()
+        gesturesControl()
+       // accelerometerControl()
     }
     
-    private func accelerometerSettings() {
+    private func accelerometerControl() {
+        leftButton.isHidden = true
+        rightButton.isHidden = true
+        
         motionManager = CMMotionManager()
         motionManager.startAccelerometerUpdates()
         
@@ -45,13 +50,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
                 if let trueData = data {
                     self.view.reloadInputViews()
-
                     self.carImageView.center.x += CGFloat(trueData.acceleration.x)
-                    
-                    print(Int(trueData.acceleration.x * 10000))
-                    
+
                     if Int(trueData.acceleration.x * 10000) > 2000 {
                         self.carImageView.transform = CGAffineTransform(rotationAngle: 0.10)
+                        
+                        if self.view.frame.width + 10 <= self.carImageView.frame.maxX {
+                            self.endGame()
+                        }
                     }
                     
                     else if Int(trueData.acceleration.x * 10000) > -2000 && Int(trueData.acceleration.x * 10000) < 2000 {
@@ -60,15 +66,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     else if Int(trueData.acceleration.x * 10000) < -2000 {
                         self.carImageView.transform = CGAffineTransform(rotationAngle: -0.10)
+                        
+                        if self.view.frame.origin.x + 10 >= self.carImageView.frame.minX {
+                            self.endGame()
+                        }
                     }
-                    
-//                    Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { timer in
-//                        if self.view.frame.origin.x + 10 >= self.carImageView.frame.minX {
-//                            timer.invalidate()
-//                            self.isGameOver = true
-//                            self.navigationController?.popToRootViewController(animated: false)
-//                        }
-//                    })
                 }
             }
         }
@@ -88,7 +90,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.insertSubview(roadBackground, at: 0)
     }
     
-    private func longPressGestiresRecognizersButtons() {
+    private func gesturesControl() {
         let pressRightButton = UILongPressGestureRecognizer(target: self, action: #selector(longPressRight))
         pressRightButton.minimumPressDuration = 0
         rightButton.addGestureRecognizer(pressRightButton)
@@ -104,9 +106,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { timer in
                 if self.view.frame.width + 10 <= self.carImageView.frame.maxX {
                     timer.invalidate()
-                    self.isGameOver = true
-                    self.player?.stop()
-                    self.navigationController?.popToRootViewController(animated: false)
+                    self.endGame()
                 }
                 
                 self.carImageView.center.x += 10
@@ -124,8 +124,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { timer in
                 if self.view.frame.origin.x + 10 >= self.carImageView.frame.minX {
                     timer.invalidate()
-                    self.isGameOver = true
-                    self.navigationController?.popToRootViewController(animated: false)
+                    self.endGame()
                 }
                 
                 self.carImageView.center.x -= 10
@@ -135,6 +134,41 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     timer.invalidate()
                 }
             })
+    }
+    
+    private func openEnterNameViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let enterNameController = storyboard.instantiateViewController(identifier: "EnterNameViewController") as? EnterNameViewController {
+            enterNameController.modalPresentationStyle = .fullScreen
+            self.navigationController?.pushViewController(enterNameController, animated: false)
+        }
+    }
+    
+    private func endGame() {
+        player?.stop()
+        isGameOver = true
+        openEnterNameViewController()
+    }
+    
+    private func setSpeed() {
+        if UserDefaults.standard.value(forKey: "speedCar") == nil {
+            speedBarrier = 0.025
+        } else {
+            switch UserDefaults.standard.value(forKey: "speedCar") as! String {
+            case "1":
+                speedBarrier = 0.055
+            case "2":
+                speedBarrier = 0.045
+            case "3":
+                speedBarrier = 0.035
+            case "4":
+                speedBarrier = 0.025
+            case "5":
+                speedBarrier = 0.015
+            default:
+                break
+            }
+        }
     }
     
     private func setCar() {
@@ -161,11 +195,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    private func buttonsDesign() {
-        leftButton.layer.cornerRadius = leftButton.frame.height / 2
-        rightButton.layer.cornerRadius = rightButton.frame.height / 2
-    }
-    
     private func createCar(name: String) {
         let image = UIImage(named: name)
         carImageView.image = image
@@ -177,30 +206,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.bringSubviewToFront(carImageView)
     }
     
-    private func chooseSpeed() {
-        if UserDefaults.standard.value(forKey: "speedCar") == nil {
-            speedBarrier = 0.025
-        } else {
-            switch UserDefaults.standard.value(forKey: "speedCar") as! String {
-            case "1":
-                speedBarrier = 0.055
-            case "2":
-                speedBarrier = 0.045
-            case "3":
-                speedBarrier = 0.035
-            case "4":
-                speedBarrier = 0.025
-            case "5":
-                speedBarrier = 0.015
-            default:
-                break
-            }
-        }
-    }
-        
     private func createBarrier(name: String) {
-        chooseSpeed()
-        
         let image = UIImage(named: name)
         barrierImageView.image = image
         barrierImageView.contentMode = .scaleAspectFit
@@ -217,33 +223,18 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
             if self.carImageView.frame.intersects(self.barrierImageView.frame) {
                 timer.invalidate()
-                self.player?.stop()
-                self.isGameOver = true
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let enterNameController = storyboard.instantiateViewController(identifier: "EnterNameViewController") as? EnterNameViewController {
-                    enterNameController.modalPresentationStyle = .fullScreen
-                    self.navigationController?.pushViewController(enterNameController, animated: false)
-                }
-            } else {
+                self.endGame()
+            }
+            else {
                 if self.barrierImageView.frame.origin.y >= self.view.frame.height {
                     timer.invalidate()
                     
                     self.result += 1
                     self.resultLabel.text = "\(self.result)"
                     UserDefaults.standard.set(self.result, forKey: "points")
-                    
-                    switch UserDefaults.standard.value(forKey: "barrier") as? String {
-                    case "bush":
-                        self.createBarrier(name: "item.png")
-                    case "conus":
-                        self.createBarrier(name: "item2.png")
-                    case "canistra":
-                        self.createBarrier(name: "item3.png")
-                    default:
-                        self.createBarrier(name: "item.png")
-                    }
-                } else {
+                    self.setBarrier()
+                }
+                else {
                     self.result += 0
                     self.resultLabel.text = "\(self.result)"
                     UserDefaults.standard.set(self.result, forKey: "points")
@@ -270,5 +261,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 self.linesArray[index].frame.origin.y = self.view.frame.height
             }
         }})
+    }
+    
+    private func buttonsDesign() {
+        leftButton.layer.cornerRadius = leftButton.frame.height / 2
+        rightButton.layer.cornerRadius = rightButton.frame.height / 2
     }
 }
