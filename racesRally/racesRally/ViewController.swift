@@ -1,6 +1,9 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let decoder = JSONDecoder() // превращает данные в объект
+    let encoder = JSONEncoder() // превращает объект в данные
 
     @IBOutlet private weak var startGameButton: UIButton!
     @IBOutlet private weak var recordsButton: UIButton!
@@ -14,6 +17,20 @@ class ViewController: UIViewController {
         mainImage()
         racesRallyText()
         buttonsSettings()
+        openOnBoardingViewController()
+    }
+    
+    private func openOnBoardingViewController() {
+        if UserDefaults.standard.value(forKey: "count") == nil {
+            UserDefaults.standard.set("already opened", forKey: "count")
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if let onBoardingViewController = storyboard.instantiateViewController(identifier: "OnBoardingViewController") as? OnBoardingViewController {
+                onBoardingViewController.modalPresentationStyle = .fullScreen
+                navigationController?.pushViewController(onBoardingViewController, animated: false)
+            }
+        }
     }
     
     private func buttonsSettings() {
