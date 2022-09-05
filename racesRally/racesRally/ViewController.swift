@@ -21,9 +21,7 @@ class ViewController: UIViewController {
     }
     
     private func openOnBoardingViewController() {
-        if UserDefaults.standard.value(forKey: "count") == nil {
-            UserDefaults.standard.set("already opened", forKey: "count")
-            
+        if Core.shared.isNewUser() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             if let onBoardingViewController = storyboard.instantiateViewController(identifier: "OnBoardingViewController") as? OnBoardingViewController {
@@ -89,5 +87,17 @@ class ViewController: UIViewController {
             settingsController.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(settingsController, animated: false)
         }
+    }
+}
+
+class Core {
+    static let shared = Core()
+    
+    func isNewUser() -> Bool {
+        return !UserDefaults.standard.bool(forKey: "isNewUser")
+    }
+    
+    func setIsNotNewUser() {
+        UserDefaults.standard.set(true, forKey: "isNewUser")
     }
 }
