@@ -3,7 +3,7 @@ import UIKit
 class OnBoardingViewController: UIViewController {
     
     let scrollView = UIScrollView()
-    let titles = ["Drive around obstacles and get points!", "You can control the car with buttons or using the accelerometer", "Share your results on social media!"]
+    let titles = ["Drive around barriers and get points!", "Control the car with buttons or using the accelerometer!", "Share your results on social media!"]
     
     @IBOutlet var holderView: UIView!
     @IBOutlet weak var roadBackground: UIImageView!
@@ -39,11 +39,9 @@ class OnBoardingViewController: UIViewController {
             pageView.addSubview(label)
             label.text = titles[x]
                         
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 100, width: 420, height: 420))
             imageView.center.x = view.center.x
-            imageView.center.y = view.center.y - 50
             imageView.contentMode = .scaleAspectFit
-            imageView.backgroundColor = .red
             imageView.image = UIImage(named: "welcome_\(x + 1)")
             pageView.addSubview(imageView)
             

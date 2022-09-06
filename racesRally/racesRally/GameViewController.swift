@@ -22,6 +22,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         createLines(pointX: 125)
         createLines(pointX: Int(self.view.frame.maxX) - 125)
+        
+        setControl()
     }
     
     override func viewDidLoad() {
@@ -33,7 +35,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setSpeed()
         setCar()
         setBarrier()
-        setControl()
+        
+        carImageView.center.y = view.frame.height - carImageView.frame.height
     }
     
     private func accelerometerControl() {

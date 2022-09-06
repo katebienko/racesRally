@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ncB-XM-osa">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ncB-XM-osa">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evN-GI-eF4">
@@ -97,11 +97,11 @@
                             <constraint firstItem="JJv-Vw-fni" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="E57-qL-DdW"/>
                             <constraint firstAttribute="bottom" secondItem="ncB-XM-osa" secondAttribute="bottom" id="HwG-jX-AOh"/>
                             <constraint firstItem="JJv-Vw-fni" firstAttribute="top" secondItem="DET-W8-BOs" secondAttribute="bottom" constant="20" id="Yag-uN-GQU"/>
-                            <constraint firstItem="ncB-XM-osa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="b7b-UB-6yg"/>
+                            <constraint firstItem="ncB-XM-osa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hD5-6O-MIj"/>
                             <constraint firstItem="ncB-XM-osa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="mnO-ez-LrI"/>
                             <constraint firstItem="evN-GI-eF4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="myy-NS-b8o"/>
-                            <constraint firstItem="ncB-XM-osa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="tUN-yE-O1i"/>
                             <constraint firstItem="FeK-nC-o3m" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wU8-z0-uMf"/>
+                            <constraint firstItem="ncB-XM-osa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xhe-43-TNg"/>
                             <constraint firstItem="DET-W8-BOs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="60" id="z0y-Oj-ouf"/>
                         </constraints>
                     </view>
@@ -163,7 +163,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t5w-wp-Y3d">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t5w-wp-Y3d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaA-rZ-4Vp">
@@ -200,11 +200,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXJ-Ft-VU9">
-                                <rect key="frame" x="344" y="64" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="bET-th-vXH"/>
-                                    <constraint firstAttribute="height" constant="30" id="gyh-wQ-vn6"/>
-                                </constraints>
+                                <rect key="frame" x="360.5" y="64" width="13.5" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

@@ -104,8 +104,8 @@ class SettingsViewController: UIViewController {
             backgroundBlueCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
             backgroundYellowCar.backgroundColor = .systemGray6
         default:
-            backgroundBlueCar.backgroundColor = .systemGray6
-            backgroundYellowCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            backgroundBlueCar.backgroundColor = UIColor(red: 209/255, green: 210/255, blue: 168/255, alpha: 1.0)
+            backgroundYellowCar.backgroundColor = .systemGray6
         }
     }
     
