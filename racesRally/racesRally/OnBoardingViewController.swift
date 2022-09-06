@@ -3,51 +3,61 @@ import UIKit
 class OnBoardingViewController: UIViewController {
     
     let scrollView = UIScrollView()
+    let titles = ["Drive around obstacles and get points!", "You can control the car with buttons or using the accelerometer", "Share your results on social media!"]
     
     @IBOutlet var holderView: UIView!
-     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBOutlet weak var roadBackground: UIImageView!
 
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        createRoad()
         configure()
     }
     
+    private func createRoad() {
+        let roadBg = UIImage(named: "roadBG.jpg")
+        roadBackground.image = roadBg
+        
+        self.view.insertSubview(roadBackground, at: 0)
+    }
+    
     private func configure() {
-
         scrollView.frame = holderView.bounds
         holderView.addSubview(scrollView)
-        
-        let titles = ["Welcome!", "Location", "All Set"]
         
         for x in 0 ..< 3 {
             let pageView = UIView(frame: CGRect(x: CGFloat(x) * holderView.frame.size.width, y: 0, width: holderView.frame.size.width, height: holderView.frame.size.height))
             
             scrollView.addSubview(pageView)
             
-            let label = UILabel(frame: CGRect(x: 10, y: 10, width: pageView.frame.size.width - 20, height: 120))
-            let imageView = UIImageView(frame: CGRect(x: 10, y: 10 + 120 + 10, width: pageView.frame.size.width - 20, height: pageView.frame.size.height - 60 - 130 - 15))
-            let button = UIButton(frame: CGRect(x: 10, y: pageView.frame.size.height - 60, width: pageView.frame.size.width - 20, height: 50))
-            
+            let label = UILabel(frame: CGRect(x: 10, y: pageView.frame.height - 200, width: pageView.frame.size.width - 20, height: 120))
             label.textAlignment = .center
-            label.font = UIFont(name: "Helvetica-Bold", size: 32)
+            label.font = UIFont(name: "Helvetica-Bold", size: 22)
+            label.numberOfLines = 4
+            label.textColor = .white
             pageView.addSubview(label)
             label.text = titles[x]
-            
+                        
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+            imageView.center.x = view.center.x
+            imageView.center.y = view.center.y - 50
             imageView.contentMode = .scaleAspectFit
+            imageView.backgroundColor = .red
             imageView.image = UIImage(named: "welcome_\(x + 1)")
             pageView.addSubview(imageView)
             
+            let button = UIButton(frame: CGRect(x: 0, y: pageView.frame.size.height - 60, width: 335, height: 60))
+            button.center.x = view.center.x
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .black
-            button.setTitle("Continue", for: .normal)
+            button.setTitle("NEXT", for: .normal)
+            button.backgroundColor = .white
+            button.setTitleColor(.black, for: .normal)
+            button.setRadiusWithShadow()
             
             if x == 2 {
-                button.setTitle("Get Started", for: .normal)
+                button.setTitle("GET STARTED", for: .normal)
             }
             
             button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
@@ -60,9 +70,7 @@ class OnBoardingViewController: UIViewController {
     }
     
     @objc func didTapButton(_ button: UIButton) {
-        guard button.tag < 3
-        else {
-            // Dismiss
+        guard button.tag < 3 else {
             Core.shared.setIsNotNewUser()
             dismiss(animated: true, completion: nil)
             navigationController?.popToRootViewController(animated: false)
