@@ -26,8 +26,6 @@ class EnterNameViewController: UIViewController {
     }
     
     @IBAction func saveResult(_ sender: Any) {
-        showShareAlert()
-        
         if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
             do {
                 gamersResult = try decoder.decode([Gamer].self, from: data)
@@ -48,6 +46,12 @@ class EnterNameViewController: UIViewController {
             if gamersResult.count > 10 {
                 gamersResult.removeLast()
             }
+            
+            if points == 0 {
+                navigationController?.popToRootViewController(animated: false)
+            } else {
+                showShareAlert()
+            }
         }
         
         do {
@@ -64,7 +68,6 @@ class EnterNameViewController: UIViewController {
         let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: UIAlertController.Style.alert)
         
         if let points = UserDefaults.standard.value(forKey: "points") as? Int {
-            
             alert.addAction(UIAlertAction(title: "Share", style: UIAlertAction.Style.default, handler: { (action) in
                 let shareText = "My result at RacesRally - \(points) points!"
                 
