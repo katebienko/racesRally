@@ -39,14 +39,18 @@ class OnBoardingViewController: UIViewController {
             pageView.addSubview(label)
             label.text = titles[x]
                         
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 100, width: 420, height: 420))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 420, height: 420))
+            imageView.center.y = view.center.y - 100
+            
             imageView.center.x = view.center.x
             imageView.contentMode = .scaleAspectFit
             imageView.image = UIImage(named: "welcome_\(x + 1)")
             pageView.addSubview(imageView)
             
-            let button = UIButton(frame: CGRect(x: 0, y: pageView.frame.size.height - 60, width: 335, height: 60))
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: 335, height: 60))
+            button.center.y = holderView.frame.size.height - button.frame.height
             button.center.x = view.center.x
+            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
             button.setTitleColor(.white, for: .normal)
             button.backgroundColor = .black
             button.setTitle("NEXT", for: .normal)
