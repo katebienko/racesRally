@@ -37,6 +37,18 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setBarrier()
         
         carImageView.center.y = view.frame.height - carImageView.frame.height
+        
+        becomeFirstResponder()
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            print("Shake")
+        }
     }
     
     private func accelerometerControl() {
