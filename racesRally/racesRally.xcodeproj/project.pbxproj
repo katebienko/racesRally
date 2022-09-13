@@ -129,12 +129,12 @@
 				4A77819628C34A6D0091BC60 /* Sounds */,
 				4A47F6D0282976D30061CE20 /* Extensions */,
 				4A77819728C34A870091BC60 /* Fonts */,
-				4A8F495F28060AD6008F1BE6 /* AppDelegate.swift */,
+				4A956CB728D02FE90074BA2E /* Models */,
 				4A8F496128060AD6008F1BE6 /* SceneDelegate.swift */,
+				4A8F495F28060AD6008F1BE6 /* AppDelegate.swift */,
 				4A8F496328060AD6008F1BE6 /* ViewController.swift */,
 				4A8F496528060AD6008F1BE6 /* Main.storyboard */,
 				4A7F5E8B285FA2020087CB92 /* RecordsTableViewCell.swift */,
-				4AE1BC42284682A900171699 /* Gamer.swift */,
 				4AE1BC3F284681CB00171699 /* EnterNameViewController.swift */,
 				4A834CC028C4F01F00F888E0 /* OnBoardingViewController.swift */,
 				4A8F497A28060CF3008F1BE6 /* SettingsViewController.swift */,
@@ -146,6 +146,14 @@
 				4A8F496D28060AD7008F1BE6 /* Info.plist */,
 			);
 			path = racesRally;
+			sourceTree = "<group>";
+		};
+		4A956CB728D02FE90074BA2E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4AE1BC42284682A900171699 /* Gamer.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

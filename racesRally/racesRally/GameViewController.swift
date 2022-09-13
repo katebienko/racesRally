@@ -11,6 +11,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var result: Int = 0
     var player: AVAudioPlayer?
     var motionManager: CMMotionManager!
+    var test: Bool = false
     
     @IBOutlet private weak var carImageView: UIImageView!
     @IBOutlet private weak var leftButton: UIButton!
@@ -43,12 +44,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override var canBecomeFirstResponder: Bool {
         return true
-    }
-    
-    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            print("Shake")
-        }
     }
     
     private func accelerometerControl() {
@@ -247,7 +242,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         Timer.scheduledTimer(withTimeInterval: speedBarrier, repeats: true, block: { timer in
             self.barrierImageView.frame.origin.y += 5
             
-            if self.carImageView.frame.intersects(self.barrierImageView.frame) {
+            if !self.test && self.carImageView.frame.intersects(self.barrierImageView.frame) {
                 timer.invalidate()
                 self.endGame()
             }
@@ -266,6 +261,18 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     UserDefaults.standard.set(self.result, forKey: "points")
                 }
             }
+        })
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            test = true
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { timer in
+            self.test = false
         })
     }
     
