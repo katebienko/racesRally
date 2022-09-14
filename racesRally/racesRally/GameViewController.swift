@@ -36,6 +36,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setSpeed()
         setCar()
         setBarrier()
+        setVolumeMusic()
         
         carImageView.center.y = view.frame.height - carImageView.frame.height
         
@@ -44,6 +45,27 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override var canBecomeFirstResponder: Bool {
         return true
+    }
+    
+    private func setVolumeMusic() {
+        if UserDefaults.standard.value(forKey: "volumeMusic") == nil {
+            player?.volume = 0.5
+        } else {
+            switch UserDefaults.standard.value(forKey: "volumeMusic") as! String {
+            case "1":
+                player?.volume = 0.1
+            case "2":
+                player?.volume = 0.3
+            case "3":
+                player?.volume = 0.5
+            case "4":
+                player?.volume = 0.7
+            case "5":
+                player?.volume = 1.0
+            default:
+                break
+            }
+        }
     }
     
     private func accelerometerControl() {

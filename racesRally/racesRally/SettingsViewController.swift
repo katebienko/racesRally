@@ -15,6 +15,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet private weak var imageBarrier3: UIImageView!
     @IBOutlet private weak var speedValue: UILabel!
     @IBOutlet private weak var sliderSpeed: UISlider!
+    @IBOutlet private weak var volumeValue: UILabel!
+    @IBOutlet private weak var sliderVolume: UISlider!
     @IBOutlet private weak var roadBackground: UIImageView!
     @IBOutlet private weak var backgroundControlButtons: UIView!
     @IBOutlet private weak var backgroundControlAccelerometer: UIView!
@@ -33,6 +35,7 @@ class SettingsViewController: UIViewController {
         showChosenControl()
         gesturesHandles()
         showChosenSpeed()
+        showChosenVolume()
     }
     
     private func setButtonsDesigns() {
@@ -47,6 +50,24 @@ class SettingsViewController: UIViewController {
         backgroundControlAccelerometer.layer.cornerRadius = 10
         
         saveChangeButton.setRadiusWithShadow()
+    }
+    
+    private func showChosenVolume() {
+        if UserDefaults.standard.value(forKey: "volumeMusic") == nil {
+            volumeValue.text = "3"
+        } else {
+            if let volumeInformation = UserDefaults.standard.value(forKey: "volumeMusic") as? String {
+                volumeValue.text = volumeInformation
+            }
+        }
+        
+        if UserDefaults.standard.value(forKey: "positionThumbMusic") == nil {
+            sliderVolume.value = 3
+        } else {
+            if let positionThumbMusic = UserDefaults.standard.value(forKey: "positionThumbMusic") as? Float {
+                sliderVolume.value = positionThumbMusic
+            }
+        }
     }
     
     private func showChosenSpeed() {
@@ -229,14 +250,21 @@ class SettingsViewController: UIViewController {
         self.view.addSubview(carImage)
     }
     
+    @IBAction func speedSliderValue(_ sender: UISlider) {
+        speedValue.text = "\(Int(sender.value))"
+    }
+    
+    @IBAction func volumeSliderValue(_ get: UISlider) {
+        volumeValue.text = "\(Int(get.value))"
+    }
+    
     @IBAction func saveChangeButtonPressed(_ sender: Any) {
         UserDefaults.standard.set(speedValue.text, forKey: "speedCar")
         UserDefaults.standard.set(sliderSpeed.value, forKey: "positionThumb")
         
+        UserDefaults.standard.set(volumeValue.text, forKey: "volumeMusic")
+        UserDefaults.standard.set(sliderVolume.value, forKey: "positionThumbMusic")
+        
         navigationController?.popToRootViewController(animated: false)
-    }
-    
-    @IBAction func speedSliderValue(_ sender: UISlider) {
-        speedValue.text = "\(Int(sender.value))"
     }
 }
