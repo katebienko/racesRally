@@ -265,6 +265,6 @@ class SettingsViewController: UIViewController {
         UserDefaults.standard.set(volumeValue.text, forKey: "volumeMusic")
         UserDefaults.standard.set(sliderVolume.value, forKey: "positionThumbMusic")
         
-        navigationController?.popToRootViewController(animated: false)
+        navigationController?.popToRootViewController(animated: true)
     }
 }
