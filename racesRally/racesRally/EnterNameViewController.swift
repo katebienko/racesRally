@@ -48,7 +48,7 @@ class EnterNameViewController: UIViewController {
             }
             
             if points == 0 {
-                navigationController?.popToRootViewController(animated: false)
+                navigationController?.popToRootViewController(animated: true)
             } else {
                 showShareAlert()
             }
@@ -63,7 +63,7 @@ class EnterNameViewController: UIViewController {
     }
     
     private func showShareAlert() {
-        navigationController?.popToRootViewController(animated: false)
+        navigationController?.popToRootViewController(animated: true)
         
         let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: UIAlertController.Style.alert)
         
