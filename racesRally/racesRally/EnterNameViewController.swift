@@ -63,27 +63,30 @@ class EnterNameViewController: UIViewController {
     }
     
     private func showShareAlert() {
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: false)
         
-        let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: .alert)
         
         if let points = UserDefaults.standard.value(forKey: "points") as? Int {
-            alert.addAction(UIAlertAction(title: "Share", style: UIAlertAction.Style.default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
                 let shareText = "My result at RacesRally - \(points) points!"
                 
-                //Convert to a string that can be used in URL queries
+                //convert to a string that can be used in URL queries
                 guard let encodedText = shareText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
-                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else { return }
+    
+                guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else {
+                return }
                 
-                //Start the share screen by putting it on the URL
-                UIApplication.shared.open(tweetURL, options: [:], completionHandler: nil)
+                print(tweetURL)
+                //start the share screen by putting it on the URL
+                UIApplication.shared.open(tweetURL)
             }))
             
             alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { (action) in
                 self.navigationController?.popToRootViewController(animated: false)
             }))
             
-            self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: false, completion: nil)
         }
     }
 }

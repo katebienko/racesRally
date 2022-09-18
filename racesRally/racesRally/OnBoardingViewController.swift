@@ -11,11 +11,11 @@ class OnBoardingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        createRoad()
+        createBackground()
         configure()
     }
     
-    private func createRoad() {
+    private func createBackground() {
         let roadBg = UIImage(named: "roadBG.jpg")
         roadBackground.image = roadBg
         
@@ -73,7 +73,6 @@ class OnBoardingViewController: UIViewController {
     
     @objc func didTapButton(_ button: UIButton) {
         guard button.tag < 3 else {
-            Core.shared.setIsNotNewUser()
             dismiss(animated: true, completion: nil)
             navigationController?.popToRootViewController(animated: false)
             

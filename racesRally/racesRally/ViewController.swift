@@ -4,6 +4,7 @@ class ViewController: UIViewController {
     
     let decoder = JSONDecoder() // превращает данные в объект
     let encoder = JSONEncoder() // превращает объект в данные
+    var newUser: Bool = UserDefaults.standard.bool(forKey: "isNewUser")
 
     @IBOutlet private weak var startGameButton: UIButton!
     @IBOutlet private weak var recordsButton: UIButton!
@@ -13,22 +14,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+ 
+        if newUser == false {
+            openOnBoardingViewController()
+        }
+       
         mainImage()
         racesRallyText()
         buttonsSettings()
-        openOnBoardingViewController()
     }
     
     private func openOnBoardingViewController() {
-        if Core.shared.isNewUser() {
+            UserDefaults.standard.set(true, forKey: "isNewUser")
+            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             if let onBoardingViewController = storyboard.instantiateViewController(identifier: "OnBoardingViewController") as? OnBoardingViewController {
                 onBoardingViewController.modalPresentationStyle = .fullScreen
                 navigationController?.pushViewController(onBoardingViewController, animated: false)
             }
-        }
     }
     
     private func buttonsSettings() {
@@ -87,17 +91,5 @@ class ViewController: UIViewController {
             settingsController.modalPresentationStyle = .fullScreen
             navigationController?.pushViewController(settingsController, animated: false)
         }
-    }
-}
-
-class Core {
-    static let shared = Core()
-    
-    func isNewUser() -> Bool {
-        return !UserDefaults.standard.bool(forKey: "isNewUser")
-    }
-    
-    func setIsNotNewUser() {
-        UserDefaults.standard.set(true, forKey: "isNewUser")
     }
 }

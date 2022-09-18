@@ -11,7 +11,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var result: Int = 0
     var player: AVAudioPlayer?
     var motionManager: CMMotionManager!
-    var test: Bool = false
+    var shakeActive: Bool = false
     
     @IBOutlet private weak var carImageView: UIImageView!
     @IBOutlet private weak var leftButton: UIButton!
@@ -30,6 +30,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        motionManager = CMMotionManager()
+        
         audioSoung()
         createBackground()
         buttonsDesign()
@@ -40,13 +42,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         carImageView.center.y = view.frame.height - carImageView.frame.height
         
-        becomeFirstResponder()
+      //  becomeFirstResponder()
     }
     
-    override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
+//    override var canBecomeFirstResponder: Bool {
+//        return true
+//    }
+//
     private func setVolumeMusic() {
         if UserDefaults.standard.value(forKey: "volumeMusic") == nil {
             player?.volume = 0.5
@@ -72,16 +74,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         leftButton.isHidden = true
         rightButton.isHidden = true
         
-        motionManager = CMMotionManager()
-        motionManager.startAccelerometerUpdates()
+    //    motionManager.startAccelerometerUpdates()
         
         if motionManager.isAccelerometerAvailable {
-            motionManager.accelerometerUpdateInterval = 0.01
             
+            //update's interval
+            motionManager.accelerometerUpdateInterval = 0.01
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
-               
                 if let trueData = data {
-                    self.view.reloadInputViews()
+                    
+                    //move car on x - coordinate
                     self.carImageView.center.x += CGFloat(trueData.acceleration.x) * 3
 
                     if Int(trueData.acceleration.x * 100) > 30 {
@@ -264,7 +266,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         Timer.scheduledTimer(withTimeInterval: speedBarrier, repeats: true, block: { timer in
             self.barrierImageView.frame.origin.y += 5
             
-            if !self.test && self.carImageView.frame.intersects(self.barrierImageView.frame) {
+            if !self.shakeActive && self.carImageView.frame.intersects(self.barrierImageView.frame) {
                 timer.invalidate()
                 self.endGame()
             }
@@ -288,13 +290,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            test = true
+            shakeActive = true
         }
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { timer in
-            self.test = false
+            self.shakeActive = false
         })
     }
     
