@@ -41,14 +41,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         setVolumeMusic()
         
         carImageView.center.y = view.frame.height - carImageView.frame.height
-        
-      //  becomeFirstResponder()
     }
     
-//    override var canBecomeFirstResponder: Bool {
-//        return true
-//    }
-//
     private func setVolumeMusic() {
         if UserDefaults.standard.value(forKey: "volumeMusic") == nil {
             player?.volume = 0.5
@@ -74,19 +68,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         leftButton.isHidden = true
         rightButton.isHidden = true
         
-    //    motionManager.startAccelerometerUpdates()
-        
         if motionManager.isAccelerometerAvailable {
-            
-            //update's interval
             motionManager.accelerometerUpdateInterval = 0.01
+            
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
                 if let trueData = data {
-                    
-                    //move car on x - coordinate
                     self.carImageView.center.x += CGFloat(trueData.acceleration.x) * 3
 
-                    if Int(trueData.acceleration.x * 100) > 30 {
+                    if Int(trueData.acceleration.x * 100) > 40 {
                         self.carImageView.transform = CGAffineTransform(rotationAngle: 0.10)
                         
                         if self.view.frame.width + 10 <= self.carImageView.frame.maxX {
@@ -94,11 +83,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                         }
                     }
                     
-                    else if Int(trueData.acceleration.x * 100) > -30 && Int(trueData.acceleration.x * 100) < 30 {
+                    else if Int(trueData.acceleration.x * 100) > -40 && Int(trueData.acceleration.x * 100) < 40 {
                         self.carImageView.transform = CGAffineTransform(rotationAngle: 0)
                     }
                     
-                    else if Int(trueData.acceleration.x * 100) < -30 {
+                    else if Int(trueData.acceleration.x * 100) < -40 {
                         self.carImageView.transform = CGAffineTransform(rotationAngle: -0.10)
                         
                         if self.view.frame.origin.x + 10 >= self.carImageView.frame.minX {
@@ -172,6 +161,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     private func openEnterNameViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
         if let enterNameController = storyboard.instantiateViewController(identifier: "EnterNameViewController") as? EnterNameViewController {
             enterNameController.modalPresentationStyle = .fullScreen
             self.navigationController?.pushViewController(enterNameController, animated: false)

@@ -28,18 +28,21 @@ class EnterNameViewController: UIViewController {
     @IBAction func saveResult(_ sender: Any) {
         if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
             do {
+                //преобразую полученные данные в массивы объектов класса Gamer, и записываю их в gamerResult
                 gamersResult = try decoder.decode([Gamer].self, from: data)
             } catch {
                 print(error.localizedDescription)
-            } 
+            }
         }
         
+        //get our points result to points
         if let points = UserDefaults.standard.value(forKey: "points") as? Int {
+            
             let dateFormatter = DateFormatter()
             dateFormatter.dateStyle = .short
             
             let gamer = Gamer(name: nameTextField.text!, seconds: points, time: dateFormatter.string(from: Date()))
-            
+
             gamersResult.append(gamer)
             gamersResult.sort(by: { $0.seconds > $1.seconds })
 
@@ -47,6 +50,7 @@ class EnterNameViewController: UIViewController {
                 gamersResult.removeLast()
             }
             
+            //share our point to Twitter
             if points == 0 {
                 navigationController?.popToRootViewController(animated: true)
             } else {
@@ -55,6 +59,7 @@ class EnterNameViewController: UIViewController {
         }
         
         do {
+            //преобразую массив объектов в данные и сохраняю в UserDefaults по ключу
             let data = try encoder.encode(gamersResult)
             UserDefaults.standard.set(data, forKey: "gamerInfo")
         } catch {
@@ -77,8 +82,6 @@ class EnterNameViewController: UIViewController {
                 guard let tweetURL = URL(string: "https://twitter.com/intent/tweet?text=\(encodedText)") else {
                 return }
                 
-                print(tweetURL)
-                //start the share screen by putting it on the URL
                 UIApplication.shared.open(tweetURL)
             }))
             

@@ -8,10 +8,6 @@ class RecordsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        nameLabel.text = "Unknown_name"
-        pointsLabel.text = "Unknown_points"
-        dateLabel.text = "Unknown_dates"
     }
     
     func setup(with info: Gamer) {    

@@ -30,7 +30,7 @@ class RecordsViewController: UIViewController {
         if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
             do {
                 let gamersResult = try decoder.decode([Gamer].self, from: data)
-                       
+    
                 if var currentValues = try? self.datasource.value() {
                     currentValues.append(contentsOf: gamersResult)
                     self.datasource.onNext(currentValues)
