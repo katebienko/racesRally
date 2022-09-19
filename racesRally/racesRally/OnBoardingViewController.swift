@@ -12,7 +12,7 @@ class OnBoardingViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         createBackground()
-        configure()
+        configureElements()
     }
     
     private func createBackground() {
@@ -22,31 +22,33 @@ class OnBoardingViewController: UIViewController {
         self.view.insertSubview(roadBackground, at: 0)
     }
     
-    private func configure() {
+    private func configureElements() {
         scrollView.frame = holderView.bounds
         holderView.addSubview(scrollView)
         
         for x in 0 ..< 3 {
+            //created 3 pageViews in different places
             let pageView = UIView(frame: CGRect(x: CGFloat(x) * holderView.frame.size.width, y: 0, width: holderView.frame.size.width, height: holderView.frame.size.height))
-            
             scrollView.addSubview(pageView)
             
+            //created label
             let label = UILabel(frame: CGRect(x: 10, y: pageView.frame.height - 200, width: pageView.frame.size.width - 20, height: 120))
             label.textAlignment = .center
             label.font = UIFont(name: "Helvetica-Bold", size: 22)
             label.numberOfLines = 4
             label.textColor = .white
-            pageView.addSubview(label)
             label.text = titles[x]
-                        
+            pageView.addSubview(label)
+           
+            //created image
             let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 420, height: 420))
             imageView.center.y = view.center.y - 100
-            
             imageView.center.x = view.center.x
             imageView.contentMode = .scaleAspectFit
             imageView.image = UIImage(named: "welcome_\(x + 1)")
             pageView.addSubview(imageView)
             
+            //created button
             let button = UIButton(frame: CGRect(x: 0, y: 0, width: 335, height: 60))
             button.center.y = holderView.frame.size.height - button.frame.height
             button.center.x = view.center.x
