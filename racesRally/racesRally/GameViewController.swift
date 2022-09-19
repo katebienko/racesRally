@@ -266,13 +266,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                     
                     self.result += 1
                     self.resultLabel.text = "\(self.result)"
+                    
                     UserDefaults.standard.set(self.result, forKey: "points")
+                    
                     self.setBarrier()
-                }
-                else {
-                    self.result += 0
-                    self.resultLabel.text = "\(self.result)"
-                    UserDefaults.standard.set(self.result, forKey: "points")
                 }
             }
         })

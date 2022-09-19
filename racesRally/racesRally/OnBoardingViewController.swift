@@ -70,18 +70,15 @@ class OnBoardingViewController: UIViewController {
         }
         
         scrollView.contentSize = CGSize(width: holderView.frame.size.width * 3, height: 0)
+        //the scroll view stops on multiples of the scroll view’s bounds when the user scrolls
         scrollView.isPagingEnabled = true
     }
     
     @objc func didTapButton(_ button: UIButton) {
-        guard button.tag < 3 else {
-            dismiss(animated: true, completion: nil)
+        if button.tag < 3 {
+            scrollView.setContentOffset(CGPoint(x: holderView.frame.size.width * CGFloat(button.tag), y: 0), animated: true)
+        } else {
             navigationController?.popToRootViewController(animated: false)
-            
-            return
         }
-        
-        // Scroll to next page
-        scrollView.setContentOffset(CGPoint(x: holderView.frame.size.width * CGFloat(button.tag), y: 0), animated: true)
     }
 }
