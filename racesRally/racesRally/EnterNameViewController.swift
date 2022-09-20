@@ -35,8 +35,8 @@ class EnterNameViewController: UIViewController {
                 }
             }
             
-            //get our points result to points
-            if let points = UserDefaults.standard.value(forKey: "points") as? Int {
+            //получаю колличество баллов со страницы игры и записываю в переменную
+            if let points = UserDefaults.standard.value(forKey: "myPoints") as? Int {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .short
@@ -72,7 +72,7 @@ class EnterNameViewController: UIViewController {
         
         let alert = UIAlertController(title: "Share a result on Twitter", message: "Do you want to share your result?", preferredStyle: .alert)
         
-        if let points = UserDefaults.standard.value(forKey: "points") as? Int {
+        if let points = UserDefaults.standard.value(forKey: "myPoints") as? Int {
             alert.addAction(UIAlertAction(title: "Share", style: .default, handler: { (action) in
                 let shareText = "My result at RacesRally - \(points) points!"
                 
