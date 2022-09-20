@@ -76,6 +76,7 @@ class OnBoardingViewController: UIViewController {
     
     @objc func didTapButton(_ button: UIButton) {
         if button.tag < 3 {
+            //set the offset from the content view’s origin
             scrollView.setContentOffset(CGPoint(x: holderView.frame.size.width * CGFloat(button.tag), y: 0), animated: true)
         } else {
             navigationController?.popToRootViewController(animated: false)
