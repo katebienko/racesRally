@@ -53,11 +53,9 @@ class OnBoardingViewController: UIViewController {
             button.center.y = holderView.frame.size.height - button.frame.height
             button.center.x = view.center.x
             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-            button.setTitleColor(.white, for: .normal)
-            button.backgroundColor = .black
-            button.setTitle("NEXT", for: .normal)
             button.backgroundColor = .white
             button.setTitleColor(.black, for: .normal)
+            button.setTitle("NEXT", for: .normal)
             button.setRadiusWithShadow()
             
             if x == 2 {
@@ -70,13 +68,12 @@ class OnBoardingViewController: UIViewController {
         }
         
         scrollView.contentSize = CGSize(width: holderView.frame.size.width * 3, height: 0)
-        //the scroll view stops on multiples of the scroll view’s bounds when the user scrolls
         scrollView.isPagingEnabled = true
     }
     
     @objc func didTapButton(_ button: UIButton) {
         if button.tag < 3 {
-            //set the offset from the content view’s origin
+            //метод setContentOffset для автоматической прокрутки до определенной точки
             scrollView.setContentOffset(CGPoint(x: holderView.frame.size.width * CGFloat(button.tag), y: 0), animated: true)
         } else {
             navigationController?.popToRootViewController(animated: false)

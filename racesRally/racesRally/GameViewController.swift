@@ -10,7 +10,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var speedBarrier: Double = 0.00
     var result: Int = 0
     var player: AVAudioPlayer?
-    var motionManager: CMMotionManager!
+    var motionManager = CMMotionManager()
     var shakeActive: Bool = false
     
     @IBOutlet private weak var carImageView: UIImageView!
@@ -30,9 +30,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        motionManager = CMMotionManager()
-        
-        audioSoung()
+        audioSound()
         createBackground()
         buttonsDesign()
         setSpeed()
@@ -99,7 +97,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    private func audioSoung() {
+    private func audioSound() {
         if let audioURL = Bundle.main.url(forResource: "car", withExtension: "mp3") {
             self.player = try? AVAudioPlayer(contentsOf: audioURL)
             player?.play()

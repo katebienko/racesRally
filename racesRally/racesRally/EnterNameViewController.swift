@@ -28,14 +28,12 @@ class EnterNameViewController: UIViewController {
     @IBAction func saveResult(_ sender: Any) {
             if let data = UserDefaults.standard.value(forKey: "gamerInfo") as? Data {
                 do {
-                    //преобразую полученные данные в массивы объектов класса Gamer, и записываю их в gamerResult
                     gamersResult = try decoder.decode([Gamer].self, from: data)
                 } catch {
                     print(error.localizedDescription)
                 }
             }
             
-            //получаю колличество баллов со страницы игры и записываю в переменную
             if let points = UserDefaults.standard.value(forKey: "myPoints") as? Int {
                 
                 let dateFormatter = DateFormatter()
@@ -50,7 +48,6 @@ class EnterNameViewController: UIViewController {
                     gamersResult.removeLast()
                 }
                 
-                //share our point to Twitter
                 if points == 0 {
                     navigationController?.popToRootViewController(animated: true)
                 } else {
@@ -59,7 +56,6 @@ class EnterNameViewController: UIViewController {
             }
             
             do {
-                //преобразую массив объектов в данные и сохраняю в UserDefaults по ключу
                 let data = try encoder.encode(gamersResult)
                 UserDefaults.standard.set(data, forKey: "gamerInfo")
             } catch {
