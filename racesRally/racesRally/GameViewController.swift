@@ -255,6 +255,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.barrierImageView.frame.origin.y += 5
             
             if !self.shakeActive && self.carImageView.frame.intersects(self.barrierImageView.frame) {
+                
+               
                 timer.invalidate()
                 self.endGame()
             }
@@ -281,6 +283,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
+           // self.carImageView.frame.size = CGSize(width: 200, height: 600)
             shakeActive = true
         }
     }
